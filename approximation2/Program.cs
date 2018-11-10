@@ -108,71 +108,71 @@ namespace approximation2
         public static void graphsInititalization()
         {
             //Example 1
-            //size1 = 9;
-            //adjacencyMatrix1 = new int[9, 9]
-            //{
-            //    {1,1,0,0,1,0,0,0,0},
-            //    {1,1,1,0,1,0,0,0,0},
-            //    {0,1,1,1,0,0,0,0,0},
-            //    {0,0,1,1,1,0,0,0,0},
-            //    {1,1,0,1,1,1,0,0,0},
-            //    {0,0,0,0,1,1,1,0,1},
-            //    {0,0,0,0,0,1,1,1,1},
-            //    {0,0,0,0,0,0,1,1,1},
-            //    {0,0,0,0,0,1,1,1,1}
-            //};
-            //G1 = new Graph(size1, adjacencyMatrix1);
-
-            //size2 = 9;
-            //adjacencyMatrix2 = new int[9, 9]
-            //{
-            //    {1,1,0,1,0,0,0,0,0},
-            //    {1,1,1,0,0,0,0,0,0},
-            //    {0,1,1,0,1,0,0,0,0},
-            //    {1,0,0,1,1,0,0,0,0},
-            //    {0,0,1,1,1,1,0,0,0},
-            //    {0,0,0,0,1,1,1,1,1},
-            //    {0,0,0,0,0,1,1,1,0},
-            //    {0,0,0,0,0,1,1,1,1},
-            //    {0,0,0,0,0,1,0,1,1}
-            //};
-            //G2 = new Graph(size2, adjacencyMatrix2);
-
-            //subgraphVertices1 = new List<Vertex>();
-            //subgraphVertices2 = new List<Vertex>();
-
-            //subgraphAdjacencyMatrix1 = new int[9, 9];
-            //subgraphAdjacencyMatrix2 = new int[9, 9];
-
-
-            //Example 2
-            size1 = 5;
-            adjacencyMatrix1 = new int[5, 5]
+            size1 = 9;
+            adjacencyMatrix1 = new int[9, 9]
             {
-                {1,1,0,0,0},
-                {1,1,1,0,0},
-                {0,1,1,1,1},
-                {0,0,1,1,1},
-                {0,0,1,1,1},
+                {1,1,0,0,1,0,0,0,0},
+                {1,1,1,0,1,0,0,0,0},
+                {0,1,1,1,0,0,0,0,0},
+                {0,0,1,1,1,0,0,0,0},
+                {1,1,0,1,1,1,0,0,0},
+                {0,0,0,0,1,1,1,0,1},
+                {0,0,0,0,0,1,1,1,1},
+                {0,0,0,0,0,0,1,1,1},
+                {0,0,0,0,0,1,1,1,1}
             };
             G1 = new Graph(size1, adjacencyMatrix1);
 
-            size2 = 5;
-            adjacencyMatrix2 = new int[5, 5]
+            size2 = 9;
+            adjacencyMatrix2 = new int[9, 9]
             {
-                {1,1,0,0,0},
-                {1,1,1,0,0},
-                {0,1,1,1,0},
-                {0,0,1,1,1},
-                {0,0,0,1,1},
+                {1,1,0,1,0,0,0,0,0},
+                {1,1,1,0,0,0,0,0,0},
+                {0,1,1,0,1,0,0,0,0},
+                {1,0,0,1,1,0,0,0,0},
+                {0,0,1,1,1,1,0,0,0},
+                {0,0,0,0,1,1,1,1,1},
+                {0,0,0,0,0,1,1,1,0},
+                {0,0,0,0,0,1,1,1,1},
+                {0,0,0,0,0,1,0,1,1}
             };
             G2 = new Graph(size2, adjacencyMatrix2);
 
             subgraphVertices1 = new List<Vertex>();
             subgraphVertices2 = new List<Vertex>();
 
-            subgraphAdjacencyMatrix1 = new int[5, 5];
-            subgraphAdjacencyMatrix2 = new int[5, 5];
+            subgraphAdjacencyMatrix1 = new int[9, 9];
+            subgraphAdjacencyMatrix2 = new int[9, 9];
+
+
+            //Example 2
+            //size1 = 5;
+            //adjacencyMatrix1 = new int[5, 5]
+            //{
+            //    {1,1,0,0,0},
+            //    {1,1,1,0,0},
+            //    {0,1,1,1,1},
+            //    {0,0,1,1,1},
+            //    {0,0,1,1,1},
+            //};
+            //G1 = new Graph(size1, adjacencyMatrix1);
+
+            //size2 = 5;
+            //adjacencyMatrix2 = new int[5, 5]
+            //{
+            //    {1,1,0,0,0},
+            //    {1,1,1,0,0},
+            //    {0,1,1,1,0},
+            //    {0,0,1,1,1},
+            //    {0,0,0,1,1},
+            //};
+            //G2 = new Graph(size2, adjacencyMatrix2);
+
+            //subgraphVertices1 = new List<Vertex>();
+            //subgraphVertices2 = new List<Vertex>();
+
+            //subgraphAdjacencyMatrix1 = new int[5, 5];
+            //subgraphAdjacencyMatrix2 = new int[5, 5];
         }
 
         public static int findMaxDegreeForBothGraphs(Graph _g1, Graph _g2)
