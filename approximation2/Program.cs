@@ -9,11 +9,11 @@ namespace approximation2
 {
     public class Program
     {
-        public static string filepath = "C:/Users/werka/Desktop/Algorithms/";
-        public static string importFilename1 = "8_8_A_Haraburda.csv";
-        public static string importFilename2 = "8_8_B_Haraburda.csv";
-        public static string exportFilename1 = "result_graph1.csv";
-        public static string exportFilename2 = "result_graph2.csv";
+        public static string filepath = "C:/Users/werka/Desktop/Algorithms/examples_densities/";
+        public static string importFilename1 = "example_6_0.3_A.csv";
+        public static string importFilename2 = "example_12_0.5_A.csv";
+        public static string exportFilename1 = "results/result_graph1.csv";
+        public static string exportFilename2 = "results/result_graph2.csv";
         public static int size1;
         public static int[,] adjacencyMatrix1;
         public static Graph G1;
@@ -49,46 +49,49 @@ namespace approximation2
             //Console.WriteLine("Max degree in G1: id:" + maxDegG1.id + ", deg:" + maxDegG1.degree);
             //Console.WriteLine("Max degree in G2: id:" + maxDegG2.id + ", deg:" + maxDegG2.degree);
 
+            DateTime begining = DateTime.Now;
             maxDegree = findMaxDegreeForBothGraphs(G1, G2);
-            //Console.WriteLine("Max degree in both: " + maxDegree);
-            root1 = G1.degreesList.Find(elem => elem.degree == maxDegree);
-            root2 = G2.degreesList.Find(elem => elem.degree == maxDegree);
-            //Console.WriteLine("Root in G1: id:" + root1.id + ", deg:" + root1.degree);
-            //Console.WriteLine("Root in G2: id:" + root2.id + ", deg:" + root2.degree);
-
-            rootNeighbours1 = G1.findNeighbours(root1, root1.id);
-            rootNeighbours2 = G2.findNeighbours(root2, root2.id);
-
-            //Console.WriteLine("Neighbours root1:");
-            //printListofVertices(rootNeighbours1);
-            //Console.WriteLine("Neighbours root2:");
-            //printListofVertices(rootNeighbours2);
-
-            foreach (Vertex v1 in rootNeighbours1)
+            if (maxDegree != 0)
             {
-                foreach (Vertex v2 in rootNeighbours2)
+                //Console.WriteLine("Max degree in both: " + maxDegree);
+                root1 = G1.degreesList.Find(elem => elem.degree == maxDegree);
+                root2 = G2.degreesList.Find(elem => elem.degree == maxDegree);
+                //Console.WriteLine("Root in G1: id:" + root1.id + ", deg:" + root1.degree);
+                //Console.WriteLine("Root in G2: id:" + root2.id + ", deg:" + root2.degree);
+
+                rootNeighbours1 = G1.findNeighbours(root1, root1.id);
+                rootNeighbours2 = G2.findNeighbours(root2, root2.id);
+
+                //Console.WriteLine("Neighbours root1:");
+                //printListofVertices(rootNeighbours1);
+                //Console.WriteLine("Neighbours root2:");
+                //printListofVertices(rootNeighbours2);
+
+                foreach (Vertex v1 in rootNeighbours1)
                 {
-                    subgraphVertices1.Add(root1);
-                    subgraphVertices2.Add(root2);
-                    subgraphVertices1.Add(v1);
-                    subgraphVertices2.Add(v2);
+                    foreach (Vertex v2 in rootNeighbours2)
+                    {
+                        subgraphVertices1.Add(root1);
+                        subgraphVertices2.Add(root2);
+                        subgraphVertices1.Add(v1);
+                        subgraphVertices2.Add(v2);
 
-                    //Console.WriteLine("Subgraph vertices 1:");
-                    //printListofVertices(subgraphVertices1);
-                    //Console.WriteLine("Subgraph vertices 2:");
-                    //printListofVertices(subgraphVertices2);
+                        //Console.WriteLine("Subgraph vertices 1:");
+                        //printListofVertices(subgraphVertices1);
+                        //Console.WriteLine("Subgraph vertices 2:");
+                        //printListofVertices(subgraphVertices2);
 
-                    algorithm(G1, G2, v1, v2);
+                        algorithm(G1, G2, v1, v2);
 
-                    pathsFromVertexWithMaxDegreeList1.Add(copyOfSubgraph(subgraphVertices1));
-                    pathsFromVertexWithMaxDegreeList2.Add(copyOfSubgraph(subgraphVertices2));
+                        pathsFromVertexWithMaxDegreeList1.Add(copyOfSubgraph(subgraphVertices1));
+                        pathsFromVertexWithMaxDegreeList2.Add(copyOfSubgraph(subgraphVertices2));
 
-                    //Console.WriteLine("--------------BACKTRACKING------------");
-                    subgraphVertices1.Clear();
-                    subgraphVertices2.Clear();
+                        //Console.WriteLine("--------------BACKTRACKING------------");
+                        subgraphVertices1.Clear();
+                        subgraphVertices2.Clear();
+                    }
                 }
             }
-
             //Console.WriteLine("------------------------");
             //Console.WriteLine("------------------------");
             //Console.WriteLine("All paths in G1:");
@@ -108,11 +111,24 @@ namespace approximation2
             //    Console.WriteLine("------------------------");
             //}
 
+            DateTime finish = DateTime.Now;
+            Console.WriteLine("Start: " + begining);
+            Console.WriteLine("End: " + finish);
+            Console.WriteLine("Total time: " + (finish - begining));
+
             var paths = getMaxSubgraph();
-
-            List<Vertex> maxPath1 = paths.Item1;
-            List<Vertex> maxPath2 = paths.Item2;
-
+            List<Vertex> maxPath1 = new List<Vertex>();
+            List<Vertex> maxPath2 = new List<Vertex>();
+            if (paths != null)
+            {
+                maxPath1 = paths.Item1;
+                maxPath2 = paths.Item2;
+            }
+            else
+            {
+                maxPath1.Add(G1.degreesList.First());
+                maxPath2.Add(G2.degreesList.First());
+            }
             Console.WriteLine("------------RESULT-------------");
             Console.WriteLine("Max subgraph in G1:");
             printListofVertices(maxPath1);
@@ -148,10 +164,14 @@ namespace approximation2
                 }
             }
 
-            path1 = pathsFromVertexWithMaxDegreeList1.ElementAt(maxId);
-            path2 = pathsFromVertexWithMaxDegreeList2.ElementAt(maxId);
-
-            return Tuple.Create(path1, path2);
+            if (maxId != 0)
+            {
+                path1 = pathsFromVertexWithMaxDegreeList1.ElementAt(maxId);
+                path2 = pathsFromVertexWithMaxDegreeList2.ElementAt(maxId);
+                return Tuple.Create(path1, path2);
+            }
+            else
+                return null;
         }
 
         public static int[,] createAdjacencyMatrixForSubgraph(int[,] graph, List<Vertex> subgraph)
