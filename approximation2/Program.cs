@@ -10,8 +10,8 @@ namespace approximation2
     public class Program
     {
         public static string filepath = "C:/Users/werka/Desktop/Algorithms/examples_densities/";
-        public static string importFilename1 = "example_6_0.3_A.csv";
-        public static string importFilename2 = "example_12_0.5_A.csv";
+        public static string importFilename1 = "example_12_0.5_A.csv";
+        public static string importFilename2 = "example_12_0.5_B.csv";
         public static string exportFilename1 = "results/result_graph1.csv";
         public static string exportFilename2 = "results/result_graph2.csv";
         public static int size1;
@@ -49,7 +49,8 @@ namespace approximation2
             //Console.WriteLine("Max degree in G1: id:" + maxDegG1.id + ", deg:" + maxDegG1.degree);
             //Console.WriteLine("Max degree in G2: id:" + maxDegG2.id + ", deg:" + maxDegG2.degree);
 
-            DateTime begining = DateTime.Now;
+            //DateTime begining = DateTime.Now;
+            var watch = System.Diagnostics.Stopwatch.StartNew();
             maxDegree = findMaxDegreeForBothGraphs(G1, G2);
             if (maxDegree != 0)
             {
@@ -111,10 +112,13 @@ namespace approximation2
             //    Console.WriteLine("------------------------");
             //}
 
-            DateTime finish = DateTime.Now;
-            Console.WriteLine("Start: " + begining);
-            Console.WriteLine("End: " + finish);
-            Console.WriteLine("Total time: " + (finish - begining));
+            //DateTime finish = DateTime.Now;
+            //Console.WriteLine("Start: " + begining);
+            //Console.WriteLine("End: " + finish);
+            //Console.WriteLine("Total time: " + (finish - begining));
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+            Console.WriteLine("Total time: " + elapsedMs);
 
             var paths = getMaxSubgraph();
             List<Vertex> maxPath1 = new List<Vertex>();
@@ -526,71 +530,3 @@ namespace approximation2
     }
 
 }
-
-
-////Example 1
-//size1 = 9;
-//adjacencyMatrix1 = new int[9, 9]
-//{
-//    {1,1,0,0,1,0,0,0,0},
-//    {1,1,1,0,1,0,0,0,0},
-//    {0,1,1,1,0,0,0,0,0},
-//    {0,0,1,1,1,0,0,0,0},
-//    {1,1,0,1,1,1,0,0,0},
-//    {0,0,0,0,1,1,1,0,1},
-//    {0,0,0,0,0,1,1,1,1},
-//    {0,0,0,0,0,0,1,1,1},
-//    {0,0,0,0,0,1,1,1,1}
-//};
-//G1 = new Graph(size1, adjacencyMatrix1);
-
-//size2 = 9;
-//adjacencyMatrix2 = new int[9, 9]
-//{
-//    {1,1,0,1,0,0,0,0,0},
-//    {1,1,1,0,0,0,0,0,0},
-//    {0,1,1,0,1,0,0,0,0},
-//    {1,0,0,1,1,0,0,0,0},
-//    {0,0,1,1,1,1,0,0,0},
-//    {0,0,0,0,1,1,1,1,1},
-//    {0,0,0,0,0,1,1,1,0},
-//    {0,0,0,0,0,1,1,1,1},
-//    {0,0,0,0,0,1,0,1,1}
-//};
-//G2 = new Graph(size2, adjacencyMatrix2);
-
-//subgraphVertices1 = new List<Vertex>();
-//subgraphVertices2 = new List<Vertex>();
-
-//subgraphAdjacencyMatrix1 = new int[9, 9];
-//subgraphAdjacencyMatrix2 = new int[9, 9];
-
-
-//Example 2
-//size1 = 5;
-//adjacencyMatrix1 = new int[5, 5]
-//{
-//    {1,1,0,0,0},
-//    {1,1,1,0,0},
-//    {0,1,1,1,1},
-//    {0,0,1,1,1},
-//    {0,0,1,1,1},
-//};
-//G1 = new Graph(size1, adjacencyMatrix1);
-
-//size2 = 5;
-//adjacencyMatrix2 = new int[5, 5]
-//{
-//    {1,1,0,0,0},
-//    {1,1,1,0,0},
-//    {0,1,1,1,0},
-//    {0,0,1,1,1},
-//    {0,0,0,1,1},
-//};
-//G2 = new Graph(size2, adjacencyMatrix2);
-
-//subgraphVertices1 = new List<Vertex>();
-//subgraphVertices2 = new List<Vertex>();
-
-//subgraphAdjacencyMatrix1 = new int[5, 5];
-//subgraphAdjacencyMatrix2 = new int[5, 5];
